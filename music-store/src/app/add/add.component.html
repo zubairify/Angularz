@@ -1,0 +1,35 @@
+<form (ngSubmit)="saveAlbum()" #addForm="ngForm">
+    <table class="table table-border">
+      <tr><th colspan="2">Add Album</th></tr>
+      <tr><td>Album ID</td>
+        <td><input [(ngModel)]="album.id" name="id" required #id='ngModel'
+              placeholder="Enter Album ID" pattern="[0-9]{4,}">
+            <span *ngIf="id.invalid" class="alert-danger">
+              Album ID is required
+            </span></td>
+        </tr>
+      <tr><td>Title</td>
+        <td><input [(ngModel)]="album.title" name="title" required #title='ngModel'
+                placeholder="Enter Album Title" pattern="[A-Za-z]{5,}">
+                <span *ngIf="title.invalid" class="alert-danger">
+                  Album Title is required
+                </span></td>
+              </tr>
+      <tr><td>Artist</td>
+          <td><input [(ngModel)]="album.artist" name="artist" #artist='ngModel' required
+                pattern="[a-zA-Z]{5,}" placeholder="Enter Artist Name" />
+                <span *ngIf="artist.invalid" class="alert-danger">
+                  Artist Name is required
+                </span></td></tr>
+      <tr><td>Price</td>
+          <td><input [(ngModel)]="album.price" name="price" required #price='ngModel'
+                pattern="[0-9]{3}" placeholder="Enter Price">
+                <span *ngIf="price.invalid" class="alert-danger">
+                  Price is required
+                </span></td>
+              </tr>
+      <tr><th colspan="2">
+          <button type="submit" class="btn btn-success" [disabled]="!addForm.valid">Save Album</button>
+      </th></tr>
+    </table>  
+</form>
