@@ -11,7 +11,7 @@ import { AlbumService } from '../services/album.service';
 export class ListComponent implements OnInit {
   albumList: AlbumModel[] = [];
 
-  constructor(private router: Router, private service : AlbumService) { }
+  constructor(private service : AlbumService) { }
 
   ngOnInit() {
     this.albumList = this.service.getList();
@@ -22,5 +22,17 @@ export class ListComponent implements OnInit {
     if (ans) {
       this.service.deleteAlbum(index); //delete from service
     }
-  }  
+  } 
+  
+  edit(index : number) {
+    this.service.update(index);
+  }
+  
+  sortByTitle() {
+    this.service.sortByTitle();
+  }
+
+  sortByPrice() {
+    this.service.sortByPrice();
+  }
 }

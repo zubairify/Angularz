@@ -1,6 +1,6 @@
-<form (ngSubmit)="saveAlbum()" #addForm="ngForm" class="was-validated">
+<form (ngSubmit)="updateAlbum()" class="was-validated">
     <table class="table table-dark">
-      <tr><th colspan="2">Add Album</th></tr>
+      <tr><th colspan="2">Edit Album</th></tr>
       <tr><td>Album ID</td>
         <td><input [(ngModel)]="album.id" name="id" required #id='ngModel'
               placeholder="Enter Album ID" pattern="[0-9]{4,}" class="form-control">
@@ -29,7 +29,7 @@
                 </span></td>
               </tr>
       <tr><th colspan="2">
-          <button type="submit" class="btn btn-success" [disabled]="!addForm.valid">Save Album</button>
+          <button type="submit" class="btn btn-success">Update Album</button>
       </th></tr>
     </table>  
 </form>
