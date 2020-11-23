@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { AlbumModel } from '../album.model';
@@ -7,15 +8,20 @@ import { AlbumModel } from '../album.model';
 })
 export class AlbumService {
   albumList : AlbumModel[] = [];
+  private baseUrl : string = "http://localhost:8880";
 
-  constructor(private router : Router) { }
+  constructor(private router : Router, private http : HttpClient) { }
 
   addAlbum(album : AlbumModel) {
-    this.albumList.push(album);
+    this.http.post(this.baseUrl + "/add", album).subscribe(
+      data => data = album
+    );
+    // this.albumList.push(album);
   }
 
-  getList() : AlbumModel[] {
-    return this.albumList;
+  getList() {
+    return this.http.get<AlbumModel[]>(this.baseUrl + "/list");
+    // return this.albumList;
   }
 
   deleteAlbum(index : number) : AlbumModel[] {
@@ -45,7 +51,8 @@ export class AlbumService {
   }
 
   searchById(id : number) {
-    return this.albumList.find(x => x.id == id);
+    return this.http.get<AlbumModel>(this.baseUrl + "/get/" + id);
+    // return this.albumList.find(x => x.id == id);
   }
 
   getByIndex(index: number) {

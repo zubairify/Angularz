@@ -14,7 +14,7 @@ export class ListComponent implements OnInit {
   constructor(private service : AlbumService) { }
 
   ngOnInit() {
-    this.albumList = this.service.getList();
+    this.service.getList().subscribe(data => this.albumList = data);
   }
 
   delete(index: number) {
@@ -29,7 +29,9 @@ export class ListComponent implements OnInit {
   }
   
   sortByTitle() {
-    this.service.sortByTitle();
+    this.albumList.sort((a,b) => a.title > b.title ? 1 : (
+      (a.title < b.title ? -1 : 0)
+    ));
   }
 
   sortByPrice() {
